@@ -65,7 +65,6 @@ function Coins(){
             setCoins(json.slice(0,100));
             setLoading(false);
         })();
-        console.log(coins);
     },[]);
     return (
         <Container>
