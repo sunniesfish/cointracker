@@ -1,7 +1,13 @@
+import { Reset } from "./GlobalStyle";
 import Router from "./Router";
 
 function App() {
-  return <Router/>;
+  return (
+    <>
+    <Reset/>
+    <Router/>
+    </>
+  );
 }
 
 export default App;
