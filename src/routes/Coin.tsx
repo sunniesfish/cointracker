@@ -158,13 +158,15 @@ function Coin(){
         <Helmet>
           <title>{state?.name ? state.name : loading? "Loading...": infoData?.name}</title>
         </Helmet>
+        <Link to={{pathname:`/`}}>
           <Header>
               <Title>{state?.name ? state.name : loading? "Loading...": infoData?.name}</Title>
           </Header>
-          {loading? 
-          <Loader>Loading...</Loader>
-          :
-          <>
+        </Link>
+        {loading? 
+        <Loader>Loading...</Loader>
+        :
+        <>
           <Overview>
             <OverviewItem>
               <span>Rank:</span>
