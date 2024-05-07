@@ -5,6 +5,7 @@ import Chart from "./Chart";
 import Price from "./Price";
 import { useQuery } from "react-query";
 import { fetchCoinInfo, fetchCoinTickers } from "../api";
+import { Helmet } from "react-helmet";
 
 
 interface RouteParams{
@@ -148,24 +149,15 @@ function Coin(){
   const priceMatch = useRouteMatch("/:coinId/price");
   const chartMatch = useRouteMatch("/:coinId/chart");
   const { isLoading : infoLoading, data : infoData } = useQuery<IInfoData>(["info", coinId],() => fetchCoinInfo(coinId));
-  const { isLoading : tieckersLoading, data : tickersData } = useQuery<IPriceData>(["tikcers", coinId],() => fetchCoinTickers(coinId));
-  // const[loading, setLoading] = useState(true);
-  // const [info, setInfo] = useState<IInfoData>();
-  // const [priceInfo, setPriceInfo] = useState<IPriceData>();
-  // useEffect(()=>{
-  //     (async () => {
-  //         const infoData = await(await fetch(`https://api.coinpaprika.com/v1/coins/${coinId}`)).json();
-  //         setInfo(infoData);
-  //     })();
-  //     (async () => {
-  //         const priceData = await(await fetch(`https://api.coinpaprika.com/v1/tickers/${coinId}`)).json();
-  //         setPriceInfo(priceData);
-  //     })();
-  //     setLoading(false);
-  // },[coinId]);
+  const { isLoading : tieckersLoading, data : tickersData } = useQuery<IPriceData>(
+      ["tikcers", coinId],() => fetchCoinTickers(coinId),{refetchInterval:5000,}
+    );
   const loading = infoLoading || tieckersLoading;
   return (
       <Container>
+        <Helmet>
+          <title>{state?.name ? state.name : loading? "Loading...": infoData?.name}</title>
+        </Helmet>
           <Header>
               <Title>{state?.name ? state.name : loading? "Loading...": infoData?.name}</Title>
           </Header>
@@ -183,8 +175,8 @@ function Coin(){
               <span>${infoData?.symbol}</span>
             </OverviewItem>
             <OverviewItem>
-              <span>Open Source:</span>
-              <span>{infoData?.open_source ? "Yes" : "No"}</span>
+              <span>Price:</span>
+              <span>{`$${tickersData?.quotes.USD.price.toFixed(2)}`}</span>
             </OverviewItem>
           </Overview>
           <Description>{infoData?.description}</Description>
@@ -201,19 +193,19 @@ function Coin(){
 
           <Tabs>
             <Tab isActive={chartMatch !== null}>
-              <Link to={`/${coinId}/chart`}>Chart</Link>
+              <Link to={`/${coinId}/chart`}>CHART</Link>
             </Tab>
             <Tab isActive={priceMatch !== null}>
-              <Link to={`/${coinId}/price`}>Price</Link>
+              <Link to={`/${coinId}/price`}>PRICE</Link>
             </Tab>
           </Tabs>
 
           <Switch>
               <Route path={`/:coinId/chart`}>
-                  <Chart/>
+                  <Chart coinId={coinId}/>
               </Route>
               <Route path={`/:coinId/price`}>
-                  <Price/>
+                  <Price coinId={coinId}/>
               </Route>
           </Switch>
         </>
