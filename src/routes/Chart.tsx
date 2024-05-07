@@ -1,5 +1,7 @@
 function Chart(){
     return(
-        null
+        <h1>chart</h1>
     );
 }
+
+export default Chart;
