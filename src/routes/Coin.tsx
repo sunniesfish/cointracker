@@ -90,10 +90,10 @@ const Tab = styled.span<{isActive:boolean}>`
   text-transform: uppercase;
   font-size: 12px;
   font-weight: 400;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${props=>props.theme.innerColor};
   padding: 7px 0px;
   border-radius: 10px;
-  color: ${props => props.isActive ? props.theme.accentColor : props.theme.textColor};
+  color: ${props => props.isActive ? props.theme.accentColor : props.theme.bgColor};
   a {
     display: block;
   }
@@ -102,9 +102,10 @@ const Tab = styled.span<{isActive:boolean}>`
 const Overview = styled.div`
   display: flex;
   justify-content: space-between;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${props=>props.theme.innerColor};
   padding: 10px 20px;
   border-radius: 10px;
+  color: ${props=>props.theme.bgColor};
 `;
 const OverviewItem = styled.div`
   display: flex;
@@ -208,7 +209,7 @@ function Coin(){
                   <Chart coinId={coinId}/>
               </Route>
               <Route path={`/:coinId/price`}>
-                  <Price coinId={coinId}/>
+                  <Price data={tickersData?.quotes.USD}/>
               </Route>
           </Switch>
         </>
