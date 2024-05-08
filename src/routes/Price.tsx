@@ -31,8 +31,8 @@ const PriceContent = styled.div`
     border-radius: 15px;
     margin-bottom: 10px;
     background-color: ${props=>props.theme.innerColor};
-    color: ${props => props.theme.bgColor};
     span{
+        color: ${props=>props.theme.bgColor};
         display: block;
         margin: 0 30px 0 30px;
     }
