@@ -12,7 +12,7 @@ const ToggleBtn = styled.button`
   background-color: transparent;
   color: ${props=>props.theme.innerColor};
   border: none;
-  position: absolute;
+  position: fixed;
   left: 20px;
   top: 10px;
 `
