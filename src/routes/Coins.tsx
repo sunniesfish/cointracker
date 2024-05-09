@@ -4,6 +4,14 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { fetchCoins } from "../api";
 import { Helmet } from "react-helmet";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleHalfStroke } from '@fortawesome/free-solid-svg-icons'; // 올바른 아이콘 가져오기
+
+const ToggleBtn = styled.button`
+  background-color: transparent;
+  color: ${props=>props.theme.innerColor};
+  border: none;
+`
 
 const Container = styled.div`
     padding: 0px 20px;
@@ -58,8 +66,10 @@ interface ICoin {
     type: string,
 }
 
+
 function Coins(){
     const {isLoading,data} = useQuery<ICoin[]>("allCoins",fetchCoins);
+    
     return (
         <Container>
             <Helmet>
@@ -67,6 +77,9 @@ function Coins(){
             </Helmet>
             <Header>
                 <Title>Coins</Title>
+                <ToggleBtn onClick={toggleDark}>
+                    <FontAwesomeIcon icon={faCircleHalfStroke} size="2x"/>
+                </ToggleBtn>
             </Header>
             {isLoading? 
             <Loader>Loading...</Loader>
