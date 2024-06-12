@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Link, Route, Switch, useLocation, useParams, useRouteMatch } from "react-router-dom";
 import { styled } from "styled-components";
 import Chart from "./Chart";
@@ -144,6 +143,7 @@ const Loader = styled.span`
 `;
 
 
+
 function Coin(){
   const {state} = useLocation<RouteState>();
   const {coinId} = useParams<RouteParams>();
@@ -180,7 +180,7 @@ function Coin(){
             </OverviewItem>
             <OverviewItem>
               <span>Price:</span>
-              <span>{`$${tickersData?.quotes.USD.price.toFixed(2)}`}</span>
+              <span>{`$${tickersData?.quotes?.USD?.price.toFixed(2)}`}</span>
             </OverviewItem>
           </Overview>
           <Description>{infoData?.description}</Description>
@@ -209,7 +209,7 @@ function Coin(){
                   <Chart coinId={coinId}/>
               </Route>
               <Route path={`/:coinId/price`}>
-                  <Price data={tickersData?.quotes.USD}/>
+                  <Price data={tickersData?.quotes?.USD}/>
               </Route>
           </Switch>
         </>

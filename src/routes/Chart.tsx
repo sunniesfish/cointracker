@@ -1,7 +1,6 @@
 import { useQuery } from "react-query";
 import { fetchCoinHistory } from "../api";
 import ApexChart from "react-apexcharts";
-import { useState } from "react";
 import {useTheme} from "styled-components";
 
 interface IChartProps {
